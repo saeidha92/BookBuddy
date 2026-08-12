@@ -31,3 +31,43 @@ bookbuddy/
 ├── exceptions/   -> custom error classes
 └── main.py       -> the CLI menu
 ```
+
+## 🖥️ Demo
+
+```
+🖥️  BookBuddy CLI
+📚 Welcome to BookBuddy!
+Track your reading, log progress, and manage your personal library.
+
+Main Menu:
+1. Add a new book
+2. View all books
+3. Log reading progress
+4. View reading progress
+5. Export book data
+6. Import book data
+7. Export reading report
+8. Exit
+
+Enter your choice (1-8): 1
+
+📘 Add a New Book
+
+Enter book title: python
+Enter author name: John Doe
+Enter genre: Self-help
+Enter total pages: 320
+
+✅ Book 'python' added successfully!
+```
+
+```
+📈 Reading Progress:
+
+python - 40/320 pages read (12.5%)
+The Hobbit - 0/310 pages read (0.0%)
+
+Overall progress: 6.25%
+Books completed: 0/2
+```
+
