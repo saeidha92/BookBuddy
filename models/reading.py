@@ -1,4 +1,6 @@
 from datetime import date
+from exceptions.errors import InvalidLogError
+
 
 class ReadingLog:
     def __init__(self, pages_read, log_date=None, notes=""):
