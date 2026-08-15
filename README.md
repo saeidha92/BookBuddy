@@ -9,6 +9,8 @@ readers stay consistent with reading. This project is the first step -
 a CLI tool - with the long-term idea of eventually becoming a full web
 app.
 
+![BookBuddy demo](./assets/demo.gif)
+
 ## What it does
 
 - Add books to your library (title, author, genre, pages, date added)
@@ -19,17 +21,40 @@ app.
 - Export a text report of your reading progress
 - Handles errors properly and logs all actions to `bookbuddy.log`
 
-## Project structure
+## 🏗️ Project Architecture
 
 ```
 bookbuddy/
-├── models/       -> Book, EBook, AudioBook, ReadingLog classes
-├── services/     -> reading tracker and progress manager (business logic)
-├── storage/      -> JSON/Pickle save and load, and the data exporter
-├── utils/        -> decorators, retry logic, and a file context manager
-├── config/       -> logging setup
-├── exceptions/   -> custom error classes
-└── main.py       -> the CLI menu
+│
+├── models/                  # Core data classes (OOP layer)
+│   ├── book.py                  Book (base class) + Readable ABC interface
+│   ├── ebook.py                 EBook(Book)   — adds file_size
+│   ├── audiobook.py             AudioBook(Book) — adds duration_minutes
+│   └── reading_log.py           ReadingLog — one reading session
+│
+├── services/                # Business logic layer
+│   ├── reading_tracker.py       Owns the book collection, logs sessions
+│   └── progress_manager.py      Progress statistics & report generation
+│
+├── storage/                 # Persistence layer
+│   ├── json_handler.py          Save/load books as JSON
+│   ├── pickle_handler.py        Save/load books as Pickle
+│   └── data_exporter.py         Facade over both handlers
+│
+├── utils/                   # Reusable helpers
+│   ├── decorators.py            @log_action, @timing
+│   ├── context.py               FileManager (safe file I/O)
+│   └── retry.py                 @retry decorator
+│
+├── config/
+│   └── logger.py             Centralized logging configuration
+│
+├── exceptions/
+│   └── errors.py             Custom exception hierarchy
+│
+├── .venv/                    Python virtual environment
+├── requirements.txt          Dependencies (standard library only)
+└── main.py                   CLI entry point
 ```
 
 ## 🖥️ Demo
@@ -71,3 +96,71 @@ Overall progress: 6.25%
 Books completed: 0/2
 ```
 
+---
+
+## 🚀 Getting Started
+
+### Requirements
+
+Python **3.9+**. No third-party packages — only the standard library.
+
+### 1. Extract the project
+
+Unzip the provided archive; you'll get a `bookbuddy/` folder.
+
+### 2. Activate the virtual environment
+
+**macOS / Linux**
+
+```bash
+cd bookbuddy
+source .venv/bin/activate
+```
+
+**Windows (PowerShell)**
+
+```powershell
+cd bookbuddy
+.venv\Scripts\Activate.ps1
+```
+
+> If `.venv` doesn't work on your machine (e.g. different OS), recreate it:
+>
+> ```bash
+> python3 -m venv .venv
+> source .venv/bin/activate   # or the Windows equivalent above
+> ```
+
+### 3. Run the app
+
+```bash
+python main.py
+```
+
+---
+
+## 📋 Usage Guide
+
+| Menu option                  | What it does                                                      |
+| ---------------------------- | ----------------------------------------------------------------- |
+| **1. Add a new book**        | Choose a type (Regular / EBook / AudioBook) and enter its details |
+| **2. View all books**        | Lists every book in your library with type-specific details       |
+| **3. Log reading progress**  | Records a reading session and updates that book's progress        |
+| **4. View reading progress** | Shows per-book and overall progress statistics                    |
+| **5. Export book data**      | Saves your whole library to a JSON or Pickle file                 |
+| **6. Import book data**      | Loads a library from a previously exported file                   |
+| **7. Export reading report** | Writes the progress report to a `.txt` file                       |
+| **8. Exit**                  | Closes the app                                                    |
+
+---
+
+## A note on Pickle
+
+Pickle files should only be imported if you created them yourself with
+this program - loading a Pickle file from somewhere else can run
+unsafe code.
+
+## Logging
+
+Every action and error gets logged to `bookbuddy.log`, so if something
+goes wrong you can check that file to see what happened.

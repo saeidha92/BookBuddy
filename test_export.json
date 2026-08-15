@@ -1,0 +1,31 @@
+[
+  {
+    "type": "Book",
+    "title": "The Midnight Library",
+    "author": "Matt Haig",
+    "genre": "Fiction",
+    "pages": 288,
+    "date_added": "2026-08-16",
+    "pages_read": 0
+  },
+  {
+    "type": "EBook",
+    "title": "Sapiens",
+    "author": "Yuval Noah Harari",
+    "genre": "History",
+    "pages": 443,
+    "date_added": "2026-08-16",
+    "pages_read": 120,
+    "file_size": 3.5
+  },
+  {
+    "type": "AudioBook",
+    "title": "Project Hail Mary",
+    "author": "Andy Weir",
+    "genre": "Science Fiction",
+    "pages": 476,
+    "date_added": "2026-08-16",
+    "pages_read": 0,
+    "duration_minutes": 960
+  }
+]
