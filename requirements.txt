@@ -1,0 +1,2 @@
+# BookBuddy only relies on the Python standard library.
+# This file is kept for good practice / future third-party dependencies.
